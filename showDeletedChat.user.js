@@ -12,7 +12,7 @@ function showDeleted() {
         var id = this.id.replace('message-', ''), _this = this;
         $.get('http://chat.stackexchange.com/messages/' + id + '/history', function(data) {
             var msgtxt = data.match(/<div class="content">([\s\S]+?)<\/div>/)[1].trim();
-            $('.content > span', _this).html(msgtxt).css({backgroundColor: '#f4eaea', color: '#000'});
+            $('.content > span', _this).html(msgtxt).css({backgroundColor: '#f4eaea', color: '#990000'});
         });
     });
 
