@@ -10,9 +10,13 @@ function showDeleted() {
 
     $('span.deleted').closest('.message').each(function() {
         var id = this.id.replace('message-', ''), _this = this;
-        $.get('//chat.stackexchange.com/messages/' + id + '/history', function(data) {
+        $.get('/messages/' + id + '/history', function(data) {
             var msgtxt = data.match(/<div class="content">([\s\S]+?)<\/div>/)[1].trim();
-            $('.content > span', _this).html(msgtxt).css({backgroundColor: '#f4eaea', color: '#990000'});
+            var deletedBy = $('b:contains("deleted")', data).closest('.monologue').find('.username a').text();
+            $('.content > span', _this)
+                .html(msgtxt)
+                .attr('title', 'Deleted by ' + deletedBy)
+                .css({backgroundColor: '#f4eaea', color: '#990000'});
         });
     });
 
